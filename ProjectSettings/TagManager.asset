@@ -7,6 +7,8 @@ TagManager:
   - Joystick
   - Shoot
   - Enemy
+  - Inventory
+  - InventoryButton
   layers:
   - Default
   - TransparentFX
