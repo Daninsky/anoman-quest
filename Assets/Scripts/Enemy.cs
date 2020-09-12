@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // Variables
+
+    public float health;
+
+    // Functions
+
+    public void Update()
     {
-        
+        if (health <= 0)
+            Die();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Die()
     {
-        
+        print("Enemy is supposedly dead");
+        Destroy(this.gameObject);
     }
+
 }
