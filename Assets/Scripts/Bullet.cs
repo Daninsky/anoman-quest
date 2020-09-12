@@ -33,5 +33,9 @@ public class Bullet : MonoBehaviour
             triggeringEnemy.GetComponent<Enemy>().health -= damage;
             Destroy(this.gameObject);
         }
+        else if(other.tag == "Player")
+        {
+            print("You got shot!");
+        }
     }
 }
