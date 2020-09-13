@@ -8,14 +8,20 @@ public class Player : MonoBehaviour
     // Variables
     public float movementSpeed;
 
+    public GameObject gunHolder;
+    public Inventory inventory;
+
+    public GameObject[] bullets;
     public GameObject bulletSpawnPoint;
-    public GameObject bullet;
     public float waitTime;
     public float maxWaitTime;
 
     private FixedJoystick joystick;
     private Button actionButton;
     private Animator animator;
+
+    private bool weaponEquip;
+    private int currentBulletID;
 
     // Functions
     void Awake()
@@ -25,6 +31,7 @@ public class Player : MonoBehaviour
         actionButton = GameObject.FindWithTag("Shoot").GetComponent<Button>();
         actionButton.onClick.AddListener(Shoot);
 
+        bullets = Resources.LoadAll<GameObject>("Prefabs");
     }
 
     void Update()
@@ -51,20 +58,38 @@ public class Player : MonoBehaviour
         // Shoot
 
         waitTime -= Time.deltaTime;
-        
+        if (waitTime < 0 && weaponEquip)
+        {
+            Shoot();
+        }
+
+
+
     }
 
     void Shoot()
     {
-        print("You pressed the button!");
 
-        if (waitTime < 0)
-        {
-            Instantiate(bullet.transform, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
+            Instantiate(bullets[currentBulletID - 1].transform, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
             waitTime = maxWaitTime;
-        }
-        
 
+    }
+
+    public void EquipWeapon(GameObject weaponToEquip, int bulletID)
+    {
+
+        if (weaponEquip)
+        {
+            Destroy(this.gunHolder.transform.GetChild(0).gameObject);
+        }
+
+        var newWeapon = Instantiate(weaponToEquip, this.gunHolder.transform.position,Quaternion.identity, this.gunHolder.transform);
+        newWeapon.transform.parent = this.gunHolder.transform;
+        newWeapon.SetActive(true);
+        Destroy(newWeapon.GetComponent<Rigidbody>());
+
+        weaponEquip = true;
+        this.currentBulletID = bulletID;
     }
 
 }

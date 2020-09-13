@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 
     // Variables
 
+    public int weaponID;
     public float speed;
     public float maxDistance;
     public float damage;

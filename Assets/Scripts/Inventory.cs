@@ -7,22 +7,20 @@ public class Inventory : MonoBehaviour
 {
     // Variables
 
-    private bool inventoryEnabled;
-    private bool lastWasWeapons;
+    private bool inventoryEnabled, lastWasWeapons;
+
+    private int initSlots, weaponSlots, armorSlots, collectibleSlots;
+
+    private GameObject[] weapons, armors, collectibles;
 
     public Button inventoryButton;
     public FixedJoystick joystick;
     public Button actionButton;
     public GameObject inventory;
 
-    public Button equipmentButton;
-    public Button collectiblesButton;
-    public Button weaponsButton;
-    public Button armorsButton;
+    public Button equipmentButton, collectiblesButton, weaponsButton, armorsButton;
 
-    public GameObject weaponsPanel;
-    public GameObject armorsPanel;
-    public GameObject collectiblesPanel;
+    public GameObject weaponsPanel, armorsPanel, collectiblesPanel;
 
     public Text type;
 
@@ -50,11 +48,118 @@ public class Inventory : MonoBehaviour
 
     }
 
+    void Start()
+    {
+        initSlots = 5;
+
+        weapons = new GameObject[initSlots];
+        armors = new GameObject[initSlots];
+        collectibles = new GameObject[initSlots];
+
+        for (int i = 0; i < initSlots; i++)
+        {
+            weapons[i] = weaponsPanel.transform.GetChild(i).gameObject;
+            armors[i] = armorsPanel.transform.GetChild(i).gameObject;
+            collectibles[i] = collectiblesPanel.transform.GetChild(i).gameObject;
+        }
+    }
+
 
     void Update()
     {
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        print("Collide pls");
+
+        if (other.tag == "Item")
+        {
+
+
+
+            GameObject itemPickedUp = other.gameObject;
+            Item item = itemPickedUp.GetComponent<Item>();
+
+            if (!item.pickedUp)
+            {
+                item.pickedUp = true;
+                AddItem(itemPickedUp, item.ID, item.type, item.description, item.icon);
+            }
+        }
+    }
+
+    void AddItem(GameObject itemObject, int itemID, string itemType, string itemDescription, Sprite itemIcon)
+    {
+
+        GameObject[] currentArray;
+
+        if (itemType == "weapon")
+        {
+            currentArray = weapons;
+        } else if (itemType == "armor")
+        {
+            currentArray = armors;
+        } else
+        {
+            currentArray = collectibles;
+        }
+
+
+        for (int i = 0; i < initSlots; i++)
+        {
+            if (!currentArray[i].GetComponent<Slot>().occupied)
+            {
+                // add the item to inventory
+                itemObject.GetComponent<Item>().pickedUp = true;
+
+                currentArray[i].GetComponent<Slot>().item = itemObject;
+                currentArray[i].GetComponent<Slot>().ID = itemID;
+                currentArray[i].GetComponent<Slot>().type = itemType;
+                currentArray[i].GetComponent<Slot>().description = itemDescription;
+                currentArray[i].GetComponent<Slot>().icon = itemIcon;
+
+                itemObject.transform.parent = currentArray[i].transform;
+                itemObject.SetActive(false);
+
+                currentArray[i].GetComponent<Slot>().UpdateSlot();
+                currentArray[i].GetComponent<Slot>().occupied = true;
+                return;
+            }
+        }
+    }
+
+    public GameObject FindItem(int itemID, string itemType)
+    {
+        GameObject[] currentArray;
+
+        if (itemType == "weapon")
+        {
+            currentArray = weapons;
+        }
+        else if (itemType == "armor")
+        {
+            currentArray = armors;
+        }
+        else
+        {
+            currentArray = collectibles;
+        }
+
+        for (int i = 0; i < initSlots; i++)
+        {
+            if (currentArray[i].GetComponent<Slot>().ID == itemID)
+            {
+                return currentArray[i].GetComponent<Slot>().item;
+            }
+        }
+
+        return null;
+
+    }
+
 
     void OpenInventory()
     {
@@ -135,5 +240,14 @@ public class Inventory : MonoBehaviour
         armorsButton.interactable = false;
         type.text = "ARMORS";
 
+    }
+
+    public void EquipItem(int ID, string type)
+    {
+        GameObject itemToEquip = FindItem(ID, type);
+
+        print("EquipItem on Inventory script working properly. Now calling player:");
+
+        this.GetComponentInParent<Player>().EquipWeapon(FindItem(ID,type), ID);
     }
 }
