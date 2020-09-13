@@ -13,7 +13,7 @@ Supposedly a simple top-down shooter prototype thingy. Made with Unity.
 
 - Character model: erika_archer model from [Maximo](www.maximo.com)
 - Virtual Joystick from Asset Store
-- Let's Make: Top-Down Shooter in Unity video series by [Sykoo](https://www.youtube.com/user/SykooTV)
+- Let's Make: Top-Down Shooter in Unity and Inventory Tutorial In Unity video series by [Sykoo](https://www.youtube.com/user/SykooTV)
 
 ### **Answers for the Questions about Experience**
 
