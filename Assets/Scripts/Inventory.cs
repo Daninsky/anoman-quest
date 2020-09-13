@@ -24,6 +24,8 @@ public class Inventory : MonoBehaviour
 
     public Text type;
 
+    public GameObject initArmor;
+
     // Functions
 
     void Awake()
@@ -62,6 +64,13 @@ public class Inventory : MonoBehaviour
             armors[i] = armorsPanel.transform.GetChild(i).gameObject;
             collectibles[i] = collectiblesPanel.transform.GetChild(i).gameObject;
         }
+
+        // init pink guy armor
+
+        Item firstArmor = initArmor.GetComponent<Item>();
+        firstArmor.pickedUp = true;
+        AddItem(initArmor, firstArmor.ID, firstArmor.type, firstArmor.description, firstArmor.icon);
+
     }
 
 
@@ -72,8 +81,6 @@ public class Inventory : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-        print("Collide pls");
 
         if (other.tag == "Item")
         {
@@ -246,8 +253,16 @@ public class Inventory : MonoBehaviour
     {
         GameObject itemToEquip = FindItem(ID, type);
 
-        print("EquipItem on Inventory script working properly. Now calling player:");
+        print("Function call: Equip Item");
 
-        this.GetComponentInParent<Player>().EquipWeapon(FindItem(ID,type), ID);
+        if (type == "weapon")
+        {
+            this.GetComponentInParent<Player>().EquipWeapon(FindItem(ID, type), ID);
+        } else if (type == "armor")
+        {
+            this.GetComponentInParent<Player>().EquipArmor(FindItem(ID, type));
+        }
+
+        
     }
 }

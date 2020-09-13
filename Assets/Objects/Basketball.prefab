@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5215755428204482198
+--- !u!1 &6674577734191639383
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3669537368660385490}
-  - component: {fileID: 3284145449504055032}
-  - component: {fileID: 637654309469427824}
-  - component: {fileID: 9027524341851022464}
-  - component: {fileID: 5296075993962606745}
-  - component: {fileID: 8485808363920195332}
+  - component: {fileID: 6674577734191639377}
+  - component: {fileID: 6674577734191639376}
+  - component: {fileID: 6674577734191639379}
+  - component: {fileID: 6674577734191639378}
+  - component: {fileID: 6674577734191639381}
+  - component: {fileID: 6674577734191639380}
   m_Layer: 0
-  m_Name: 2
-  m_TagString: Untagged
+  m_Name: Basketball
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3669537368660385490
+--- !u!4 &6674577734191639377
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5215755428204482198}
-  m_LocalRotation: {x: 0.6677809, y: -0, z: -0, w: 0.744358}
-  m_LocalPosition: {x: -18.696234, y: 0.093618155, z: -0.9028487}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_GameObject: {fileID: 6674577734191639383}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -28.6, y: 0.673, z: 12.528}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 83.79201, y: 0, z: 0}
---- !u!33 &3284145449504055032
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6674577734191639376
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5215755428204482198}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &637654309469427824
+  m_GameObject: {fileID: 6674577734191639383}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6674577734191639379
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5215755428204482198}
+  m_GameObject: {fileID: 6674577734191639383}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: da97c049b52f0ea47a74de32f0a9590d, type: 2}
+  - {fileID: 2100000, guid: 27dafebfddcfa564ab7737a642e03a13, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,44 +82,44 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &9027524341851022464
-CapsuleCollider:
+--- !u!135 &6674577734191639378
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5215755428204482198}
+  m_GameObject: {fileID: 6674577734191639383}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
+  serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5296075993962606745
+--- !u!114 &6674577734191639381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5215755428204482198}
+  m_GameObject: {fileID: 6674577734191639383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8326ee5dcf2fe8f4e843291b36c5a6e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1596015eac296d94b8b0e1fb184480bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponID: 2
-  speed: 10
-  maxDistance: 0
-  damage: 10
-  triggeringEnemy: {fileID: 0}
---- !u!54 &8485808363920195332
+  ID: 1
+  type: collectible
+  description: probably a basketball
+  icon: {fileID: 21300000, guid: 6bea58f865846714c8db6c8e15546732, type: 3}
+  pickedUp: 0
+  equipped: 0
+--- !u!54 &6674577734191639380
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5215755428204482198}
+  m_GameObject: {fileID: 6674577734191639383}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0

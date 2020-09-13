@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
     private bool weaponEquip;
     private int currentBulletID;
+    private GameObject armor;
 
     // Functions
     void Awake()
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
         // Shoot
 
         waitTime -= Time.deltaTime;
-        if (waitTime < 0 && weaponEquip)
+        if (waitTime < 0)
         {
             Shoot();
         }
@@ -69,9 +70,11 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
-
+            if (weaponEquip)
+            {
             Instantiate(bullets[currentBulletID - 1].transform, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
             waitTime = maxWaitTime;
+            }
 
     }
 
@@ -90,6 +93,16 @@ public class Player : MonoBehaviour
 
         weaponEquip = true;
         this.currentBulletID = bulletID;
+    }
+
+    public void EquipArmor(GameObject armor)
+    {
+
+        this.armor = armor;
+        Color color = armor.gameObject.GetComponent<Renderer>().material.color;
+
+        this.gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<Renderer>().material.SetColor("_Color", color);
+
     }
 
 }

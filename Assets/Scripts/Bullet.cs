@@ -30,6 +30,9 @@ public class Bullet : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
+
+            print("You shot the enemy!");
+
             triggeringEnemy = other.gameObject;
             triggeringEnemy.GetComponent<Enemy>().health -= damage;
             Destroy(this.gameObject);
